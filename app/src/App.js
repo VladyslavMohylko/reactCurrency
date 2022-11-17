@@ -19,7 +19,6 @@ class App extends React.Component {
         <div className='container'>
           <main>
             <Rate />
-
           </main>
         </div>
         <Footer />
