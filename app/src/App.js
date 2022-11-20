@@ -6,10 +6,10 @@ import Rate from './Rate/Rate';
 import Footer from './Footer/Footer';
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
 
-  // }
+  }
 
   render() {
     return (
