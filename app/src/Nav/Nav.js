@@ -13,9 +13,8 @@ class Nav extends React.Component {
           <div className='container'>
             <nav>
               <ul>
-                {/* <li><a href='#'>Main</a></li>
-                <li><a href='#'>Currency Exchange</a></li>
-                <li><a href='#'>Contacts</a></li> */}
+                <li><a href='/'>Main</a></li>
+                <li><a href='/about'>About</a></li>
               </ul>
             </nav>
           </div>
