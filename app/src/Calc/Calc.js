@@ -4,7 +4,21 @@ import './Calc.css';
 class Calc extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      result : 0,
+    }
+  }
 
+  static getDerivedStateFromProps(props, state) {
+    return {rate: props.rate};
+  }
+
+  calcRate = (event) => {
+    event.preventDefault();
+    let elements = event.target.elements;
+    let countCurrency = elements['count-currency'].value;
+    let typeCurrency = elements['type-currency'].value;
+    this.setState({result: (countCurrency / this.state.rate[typeCurrency]).toFixed(3)})
   }
 
   render() {
@@ -13,22 +27,22 @@ class Calc extends React.Component {
         <h3>Калькулятор обміну валют</h3>
         <div className='block'>
           <div>Я хочу</div>
-          <div><label><input type="radio" name="radio" defaultValue="0" />купити</label></div>
-          <div><label><input type="radio" name="radio" defaultValue="1" />продати</label></div>
           <div>
-            <input type="number" defaultValue="150" />
-            <select name='' id=''>
-              <option value="USD">USD</option>
-              <option value="USD">EUR</option>
-            </select>
+            <form onSubmit={this.calcRate}>
+              <input type="number" defaultValue="150" name="count-currency"/>
+              <select name='type-currency' id=''>
+                {Object.keys(this.props.rate).map((keyName) => (
+                  <option defaultValue={keyName} key={keyName}>{keyName}</option>
+                )
+                )}
+              </select>
+              <input type="Submit" defaultValue="Розрахувати" />
+            </form>
           </div>
           <div>
             <h4>Результат</h4>
             <ul className='calc-res'>
-              <li>EUR 150</li>
-              <li>EUR 150</li>
-              <li>EUR 150</li>
-              <li>EUR 150</li>
+              <li>EUR {this.state.result}</li>
             </ul>
           </div>
         </div>

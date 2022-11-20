@@ -11,7 +11,14 @@ class Rate extends React.Component {
       'currencyRate': {},
     }
     this.currency = ['USD', 'UAH', 'CZK', 'PHP']
+  }
+
+  handleLoad = () => {
     this.getRate();
+  }
+
+  componentDidMount() {
+    window.addEventListener('load', this.handleLoad)
   }
 
   getRate = () => {
@@ -33,7 +40,7 @@ class Rate extends React.Component {
       <div className='rate'>
         <h3>Курс валют станом на {this.state.date}</h3>
         <div className='flex-container'>
-          {Object.keys(this.state.currencyRate).map((keyName, i) => (
+          {Object.keys(this.state.currencyRate).map((keyName) => (
             <div className='block flex-item' key={keyName}>
               <div className='currency-name'>{keyName}</div>
               <div className='currency-in'>{this.state.currencyRate[keyName].toFixed(3)}</div>
@@ -43,7 +50,7 @@ class Rate extends React.Component {
           )
           )}
         </div>
-        <Calc />
+        <Calc rate={this.state.currencyRate}/>
       </div>
     );
   }
